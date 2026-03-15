@@ -14,7 +14,7 @@ NOTE: Refer to <<#subscribed-events,Subscribed Events>> below for a list of even
 
 === Supported Versions
 
-* Integrating with Bitbucket Data Center or Bitbucket Server extends support for Bitbucket Data Center and Data Center Server versions 6.7 and later
+* Integrating with Bitbucket Data Center or Bitbucket Server extends support for Bitbucket Data Center and Data Center Server version 8 and later
 
 * The CI/CD Security module is compatible with Bitbucket Data Center and Bitbucket Server versions 8 and later
 
