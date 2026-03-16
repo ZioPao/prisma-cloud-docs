@@ -25,6 +25,7 @@ Learn what's new in the Prisma® Cloud February 2026 release.
 
 |*Debian 13 Support*
 //CWP-64272/CWP-64257
+
 tt:[Secure the Runtime]
 
 
@@ -32,6 +33,7 @@ tt:[Secure the Runtime]
 
 |*Support for TLS 1.3*
 //CWP-64280
+
 tt:[Secure the Runtime]
 
 
