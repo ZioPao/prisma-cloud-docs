@@ -4,7 +4,7 @@ Learn what's new in the Prisma® Cloud February 2026 release.
 
 
 //* <<new-features>>
-//* <<enhancements>>
+* <<enhancements>>
 * <<changes-in-existing-behavior>>
 * <<api-ingestions>>
 //* <<new-policies>>
@@ -14,6 +14,80 @@ Learn what's new in the Prisma® Cloud February 2026 release.
 //* <<new-compliance-benchmarks-and-updates>>
 //* <<rest-api-updates>>
 //* <<deprecation-notices>>
+
+
+[#enhancements]
+=== Enhancements
+[cols="30%a,70%a"]
+|===
+|*Feature*
+|*Description*
+
+|*Debian 13 Support*
+//CWP-64272/CWP-64257
+
+tt:[Secure the Runtime]
+
+
+|Debian 13 (Trixie), the current stable distribution of Linux is now supported.
+
+|*Support for TLS 1.3*
+//CWP-64280
+
+tt:[Secure the Runtime]
+
+
+|TLS 1.3,  the latest version of the Transport Layer Security protocol is now supported.
+
+|*CIS Bottlerocket Benchmark Support*
+//CWP-64282
+
+tt:[Secure the Runtime]
+
+
+|CIS Bottlerocket Benchmark control, that gauges the compliance of the Bottlerocket container hosting operating system is now supported. Coverage for controls 1.3.1, 1.4.3, and 1.4.4 are included.
+
+|*GCP Cloud Function Gen 2 support via Cloud Run Admin API*
+//CWP-64217
+
+tt:[Secure the Runtime]
+
+
+|Serverless scanning now discovers and protects Gen 2 Cloud Functions created through the Cloud Run Admin API, ensuring full coverage of your GCP serverless workloads.
+
+|*Nftables support for Cloud Native Network Firewall*
+//CWP-64459
+
+tt:[Secure the Runtime]
+
+
+|Defenders now support Nftables for Cloud Native Network Firewall (CNNF), enabling network protection on modern Linux systems that use NFTables instead of iptables.
+
+|*PAN-OS active boot volume scanning*
+//CWP-64601
+
+tt:[Secure the Runtime]
+
+
+|Extended host scanning support to include PAN-OS firewalls using the active boot volume configuration.
+
+|*Faster CVE loading in vulnerability evaluator*
+//CWP-64606
+
+tt:[Secure the Runtime]
+
+
+|Optimized CVE data loading for improved performance when analyzing vulnerabilities.										
+ 	
+|*Agentless scanning stability enhancements*
+//CWP-64436, CWP-64590
+
+tt:[Secure the Runtime]
+
+
+|Multiple improvements to agentless scanning reliability, reducing scan failures and improving consistency across cloud environments.
+
+|===
 
 [#changes-in-existing-behavior]
 === Changes in Existing Behavior
