@@ -23,12 +23,10 @@ Learn what's new in the Prisma® Cloud April 2026 release.
 
 |===
 
-|*Audit Log Retention Policy Updates*
+|*Audit Log Retention Policy*
 //RLP=158209
 
-|Prisma Cloud will update the retention policy for Cloud Service Provider (CSP) audit logs. The retention period for audit events stored in the Prisma Cloud database will change from 120 days to 30 days.
-
-This change ensures a more responsive experience and efficient resource utilization across all environments. 
+|The retention period for audit events stored in the Prisma Cloud database changes from 120 days to 30 days. This update is part of our ongoing efforts to optimize performance and resource usage. The new retention period ensures a more responsive experience and efficient resource utilization across all environments. 
 
 
 *Impact*: Features that rely on historical audit data will be impacted: +
@@ -353,7 +351,7 @@ config from cloud.resource where cloud.type = 'gcp' AND api.name = 'gcloud-datap
 |*CIS Amazon Web Services Foundations Benchmark v6.0.0*
 //RLP-158111
 
-|Prisma Cloud has been updated to incorporate support for the CIS Amazon Web Services Foundations Benchmark v6.0.0 Level 1 and Level 2.
+|Prisma Cloud now supports CIS Amazon Web Services Foundations Benchmark v6.0.0 Level 1 and Level 2.
 
 Level 1 defines a set of fundamental, broadly applicable security best practices that harden core AWS services while minimizing impact on usability and operations for most environments.
 
@@ -364,7 +362,7 @@ You can view this built-in standard and the associated policies on the *Complian
 |*CIS Microsoft Azure Foundations Benchmark v5.0.0*
 //RLP-158110
 
-|Prisma Cloud has been updated to incorporate support for the CIS Microsoft Azure Foundations Benchmark v5.0.0 Level 1 and Level 2.
+|Prisma Cloud now supports CIS Microsoft Azure Foundations Benchmark v5.0.0 Level 1 and Level 2.
 
 Level 1 provides baseline, broadly applicable security controls designed to strengthen an Azure environment without causing significant disruption to usability or operations.
 
