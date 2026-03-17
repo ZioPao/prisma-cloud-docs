@@ -4,6 +4,7 @@ Stay informed on the new capabilities and policies added to Prisma Cloud for Clo
 
 
 * xref:features-introduced-in-february-2026.adoc[Features Introduced in February 2026]
+* xref:features-introduced-in-april-2026.adoc[Features Introduced in April 2026] 
 
 
 Refer to the xref:../../limited-ga-features-prisma-cloud/limited-ga-features-prisma-cloud.adoc[Limited GA Features on Prisma Cloud] for features that have limited general availability (LGA).
