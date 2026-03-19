@@ -70,7 +70,7 @@ You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to
 
 |*PCSUP-30884*
 
-|Resolved a regression in Quinn Update 4 that makes the Defender set iptables/nftables entries in your environment, even when there is no policy such as Cloud Native Network Security (CNNS) or DNS monitoring requesting it.
+|Resolved a regression in Quinn update 34.04.145 that makes the Defender set iptables/nftables entries in your environment, even when there is no policy such as Cloud Native Network Security (CNNS) or DNS monitoring requesting it.
 
 This bug affects all 34.04 Defenders. If the Defender is deployed on Tanzu Application Service (TAS), this may lead to severe connectivity issues.
 
