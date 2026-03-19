@@ -70,10 +70,11 @@ You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to
 
 |*PCSUP-30884*
 
-|Resolved a regression in Quinn Update 4 that makes the Defender set iptables/nftables entries on the machine, even when there's no policy such as CNNS or DNS monitoring requesting it.
+|Resolved a regression in Quinn Update 4 that makes the Defender set iptables/nftables entries on the machine, even when there's no policy such as Cloud Native Network Security (CNNS) or DNS monitoring requesting it.
 
-This bug affects all 34.04 Defenders. In case of a Defender running on a machine that has an active policy such as Cloud Native Network Security (CNNS) or DNS monitoring, or a Telephony Application Server (TAS) it may lead to severe connectivity issues.
-The referenced hotfix mentioned addresses this issue and ensures that iptables/nftables rules will be set only when it is explicitly reflected in the policy. 
+This bug affects all 34.04 Defenders. In case of a Defender running on a machine that has an active policy such as Telephony Application Server (TAS) or CNNS or DNS monitoring, this may lead to severe connectivity issues.
+
+The referenced hotfix addresses this issue and ensures that iptables/nftables rules will be set only when it is explicitly reflected in the policy. 
 
 |===
 
