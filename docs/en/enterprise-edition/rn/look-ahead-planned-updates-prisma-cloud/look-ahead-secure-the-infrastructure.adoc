@@ -12,10 +12,10 @@ The details and functionalities listed below are a preview and the actual releas
 ====
 
 * <<changes-in-existing-behavior>>
+* <<api-ingestions>>
 * <<new-policies>>
 * <<policy-updates>>
 * <<policy-deletions>>
-* <<api-ingestions>>
 * <<deprecation-notices>>
 
 
@@ -52,105 +52,6 @@ No additional action is required. If your compliance or operational requirements
 |===
 
 
-[#new-policies] 
-=== New Policies
-
-To learn about the upcoming new Prisma Cloud policies and updates to existing Prisma Cloud policies, you need access to the *private* Prisma Cloud policies repository on GitHub. The folder contains RQL based Config, IAM, Network, and Audit Event policies in JSON format. 
-
-Contact your Prisma Cloud representative, who will let you know the information required to get access to the repository. Once you receive access to the Prisma Cloud policies repository:
-
-. Select the branch for which you want to review policy updates.
-+
-The *Master* branch represents the Prisma Cloud release that is generally available. You can switch to a previous release or the next release branch, to review the policies that were published previously or are planned for the upcoming release.
-+
-Because Prisma Cloud typically has a monthly release, the release naming convention in GitHub is PCS-<year>.<month>.<1>. For example, PCS-26.4.1.
-
-. Review the updates.
-+
-Use the changelog.md file for a cumulative list of all policies that are added to a specific release. The policies are grouped by new policies and updated policies.
-
-Use the *policies* folder to review the JSON for each policy that is added or updated as listed in the changelog. The filename for each policy matches the policy name listed in the changelog. Within each policy file, the JSON field names are described aptly to help you easily identify the characteristic it represents. The JSON field named searchModel.query provides the RQL for the policy.
-
-
-[#policy-updates]
-=== Policy Updates
-
-[cols="40%a,60%a"]
-|===
-|*Policy Updates*
-|*Description*
-
-2+|*Policy Updates—RQL*
-
-|*GCP Dataproc Cluster on Compute Engine is using default network*
-//RLP-156954
-
-|*Changes–* The policy RQL will be updated to match GCP API.
-
-*Current RQL–*
-----
-config from cloud.resource where cloud.type = 'gcp' AND api.name = 'gcloud-dataproc-clusters-list' AND json.rule = status.state is member of ("SCHEDULED", "CREATING", "RUNNING") and ( environmentConfig.executionConfig.networkUri ends with "default" or environmentConfig.executionConfig.subnetworkUri ends with "default" or ( environmentConfig.executionConfig.networkUri does not exist and environmentConfig.executionConfig.subnetworkUri does not exist ) )
-----
-
-*Proposed RQL–*
-----
-config from cloud.resource where cloud.type = 'gcp' AND api.name = 'gcloud-dataproc-clusters-list' AND json.rule = status.state is member of ("SCHEDULED", "CREATING", "RUNNING") and ( config.gceClusterConfig.networkUri ends with "default" or config.gceClusterConfig.subnetworkUri ends with "default" or ( config.gceClusterConfig.networkUri does not exist and config.gceClusterConfig.subnetworkUri does not exist ) )
-----
-
-*Policy Type–* Config 
-
-*Policy Severity–* Medium
-
-*Impact–* Low. New alerts will be generated as per the new RQL.
-
-|*GCP Dataproc Cluster on Compute Engine is using default network*
-//RLP-156961
-
-|*Changes–* The policy RQL will be updated to cover Dataproc clusters using zonal GKE.
-
-*Current RQL–*
-----
-config from cloud.resource where api.name = 'gcloud-dataproc-clusters-list' AND json.rule = status.state is member of ("SCHEDULED", "CREATING", "RUNNING") as X; config from cloud.resource where api.name = 'gcloud-container-describe-clusters' AND json.rule = status equals RUNNING and ['network'] ends with "default" as Y; filter ' $.Y.selfLink contains $.X.virtualClusterConfig.kubernetesClusterConfig.gkeClusterConfig.gkeClusterTarget '; show X;
-----
-
-*Proposed RQL–*
-----
-config from cloud.resource where api.name = 'gcloud-dataproc-clusters-list' as X; config from cloud.resource where api.name = 'gcloud-container-describe-clusters' AND json.rule = status equals RUNNING and ['network'] ends with "default" as Y; filter ' $.X.virtualClusterConfig.kubernetesClusterConfig.gkeClusterConfig.gkeClusterTarget contains $.Y.location and $.X.virtualClusterConfig.kubernetesClusterConfig.gkeClusterConfig.gkeClusterTarget contains $.Y.name and $.Y.selfLink contains $.X.projectId '; show X;
-----
-
-*Policy Type–* Config 
-
-*Policy Severity–* Medium
-
-*Impact–* Low. New alerts will be generated as per the new RQL.
-
-|*Azure VM OS disk is encrypted with the default encryption key instead of ADE/CMK*
-//RLP-157779
-
-|*Changes–* The policy RQL will be updated to remove the `encryptionSettings` parameter.
-
-*Current RQL–*
-----
-config from cloud.resource where cloud.type = 'azure' AND api.name = 'azure-disk-list' and json.rule = 'osType exists and managedBy exists and (encryptionSettings does not exist or encryptionSettings.enabled == false) and encryption.type is not member of ("EncryptionAtRestWithCustomerKey", "EncryptionAtRestWithPlatformAndCustomerKeys")' 
-----
-
-*Proposed RQL–*
-----
-config from cloud.resource where cloud.type = 'azure' AND api.name = 'azure-disk-list' and json.rule = 'osType exists and managedBy exists and encryption.type is not member of ("EncryptionAtRestWithCustomerKey", "EncryptionAtRestWithPlatformAndCustomerKeys")'
-----
-
-*Policy Type–* Config 
-
-*Policy Severity–* Medium
-
-*Impact–* Low
-
-
-// 2+|*Policy Updates—Metadata*
-
-|===
-
-
 [#api-ingestions]
 === API Ingestions
 
@@ -159,6 +60,31 @@ config from cloud.resource where cloud.type = 'azure' AND api.name = 'azure-disk
 
 |*Service*
 |*API Details*
+
+|*Amazon Neptune*
+//RLP-158055
+
+|*aws-neptune-analytics-graph*
+
+Additional permissions required:
+
+* `neptune-graph:ListGraphs`
+* `neptune-graph:GetGraph`
+* `neptune-graph:ListTagsForResource`
+
+The Security Audit role does not include the permissions. A custom role is required.
+
+|*Amazon AppStream 2.0*
+//RLP-158052
+
+|*aws-app-stream-app-block-builder*
+
+Additional permissions required:
+
+* `appstream:DescribeAppBlockBuilders`
+* `appstream:ListTagsForResource`
+
+The Security Audit role does not include the permissions. A custom role is required.
 
 |*AWS Secrets Manager*
 //RLP-158050
@@ -220,6 +146,18 @@ Additional permissions required:
 * `dms:ListTagsForResource`
 
 The Security Audit role includes the permissions.
+
+|*Azure Power BI Embedded*
+//RLP-158037
+
+|*azure-powerbi-dedicated-capacities-diagnostic-settings*
+
+Additional permissions required:
+
+* `Microsoft.PowerBIDedicated/servers/read`
+* `Microsoft.PowerBIDedicated/capacities/read`
+
+The Reader role includes the permissions.
 
 |*AWS Database Migration Service*
 //RLP-157838
@@ -285,96 +223,6 @@ The Security Audit role includes the permissions.
 
 NOTE: This API only supports AWS service 'VPC' Quota details.
 
-|*Amazon Elasticsearch Service*
-//RLP-157967
-
-|*aws-es-serverless-access-policy*
-
-Additional permissions required:
-
-* `aoss:ListAccessPolicies`
-* `aoss:GetAccessPolicy`
-
-You must manually add the permissions to a custom role.
-
-|*Amazon Elasticsearch Service*
-//RLP-157968
-
-|*aws-es-serverless-security-policy*
-
-Additional permissions required:
-
-* `aoss:ListSecurityPolicies`
-* `aoss:GetSecurityPolicy`
-
-You must manually add the permissions to a custom role.
-
-|*Amazon Q Business*
-//RLP-157995
-
-|*aws-qbusiness-index*
-
-Additional permissions required:
-
-* `qbusiness:ListIndices`
-* `qbusiness:GetIndex`
-* `qbusiness:ListApplications`
-* `qbusiness:GetApplication`
-* `qbusiness:ListDataSources`
-* `qbusiness:GetDataSource`
-
-The Security Audit role includes the permissions.
-
-|*Amazon Q Business*
-//RLP-157997
-
-|*aws-qbusiness-application*
-
-Additional permissions required:
-
-* `qbusiness:ListApplications`
-* `qbusiness:GetApplication`
-* `qbusiness:GetPolicy`
-* `qbusiness:GetChatControlsConfiguration`
-* `qbusiness:ListTagsForResource`
-
-The Security Audit role includes the permissions.
-
-|*Google Private Service Connect*
-//RLP-157963
-
-|*gcloud-psc-connection-policy*
-
-Additional permission required:
-
-* `networkconnectivity.serviceConnectionPolicies.list`
-
-The Viewer role includes the permission.
-
-|*Google Backup For GKE*
-//RLP-157998
-
-|*gcloud-gke-backup-backup-plan*
-
-Additional permissions required:
-
-* `gkebackup.backupPlans.list`
-* `gkebackup.backupPlans.getIamPolicy`
-
-The Viewer role includes the permissions.
-
-|*Google Backup For GKE*
-//RLP-157999
-
-|*gcloud-gke-backup-restore-plan*
-
-Additional permissions required:
-
-* `gkebackup.restorePlans.list`
-* `gkebackup.restorePlans.getIamPolicy`
-
-The Viewer role includes the permissions.
-
 |*Google Cloud SQL*
 //RLP-157761
 
@@ -408,31 +256,150 @@ Additional permission required:
 
 The Viewer role includes the permission.
 
-|*Google Private Service Connect*
-//RLP-157964
+|===
 
-|*gcloud-psc-network-attachment*
+[#new-policies] 
+=== New Policies
 
-Additional permission required:
+To learn about the upcoming new Prisma Cloud policies and updates to existing Prisma Cloud policies, you need access to the *private* Prisma Cloud policies repository on GitHub. The folder contains RQL based Config, IAM, Network, and Audit Event policies in JSON format. 
 
-* `compute.networkAttachments.list`
-* `compute.networkAttachments.getIamPolicy`
+Contact your Prisma Cloud representative, who will let you know the information required to get access to the repository. Once you receive access to the Prisma Cloud policies repository:
 
-The Viewer role includes the permissions.
+. Select the branch for which you want to review policy updates.
++
+The *Master* branch represents the Prisma Cloud release that is generally available. You can switch to a previous release or the next release branch, to review the policies that were published previously or are planned for the upcoming release.
++
+Because Prisma Cloud typically has a monthly release, the release naming convention in GitHub is PCS-<year>.<month>.<1>. For example, PCS-26.4.1.
 
-|*Google Private Service Connect*
-//RLP-157962
+. Review the updates.
++
+Use the changelog.md file for a cumulative list of all policies that are added to a specific release. The policies are grouped by new policies and updated policies.
 
-|*gcloud-psc-service-attachment*
+Use the *policies* folder to review the JSON for each policy that is added or updated as listed in the changelog. The filename for each policy matches the policy name listed in the changelog. Within each policy file, the JSON field names are described aptly to help you easily identify the characteristic it represents. The JSON field named searchModel.query provides the RQL for the policy.
 
-Additional permission required:
 
-* `compute.serviceAttachments.list`
-* `compute.serviceAttachments.getIamPolicy`
+[#policy-updates]
+=== Policy Updates
 
-The Viewer role includes the permissions.
+[cols="50%a,50%a"]
+|===
+
+|*Policy Name*
+|*Details*
+
+|*Azure VM disk configured with overly permissive network access*
+//RLP-158224
+
+|*Severity:* Medium
+
+*Changes:* The policy RQL has been updated to exclude Azure VM disks created for Prisma Cloud Azure agentless scanning (tagged with 'prismacloud-agentless-scan').
+
+*Current RQL:*
+----
+config from cloud.resource where cloud.type = 'azure' AND api.name = 'azure-disk-list' AND json.rule = publicNetworkAccess equal ignore case Enabled and networkAccessPolicy equal ignore case AllowAll and managedBy contains virtualMachines
+----
+
+*Updated RQL:*
+----
+config from cloud.resource where cloud.type = 'azure' AND api.name = 'azure-disk-list' AND json.rule = publicNetworkAccess equal ignore case Enabled and networkAccessPolicy equal ignore case AllowAll and managedBy contains virtualMachines and tags.created-by does not equal ignore case "prismacloud-agentless-scan"
+----
+
+*Impact:* Medium - Previously reported disks tagged with 'prismacloud-agentless-scan' will be resolved as Policy Updated.
+
+|*Azure VM OS disk is encrypted with the default encryption key instead of ADE/CMK*
+//RLP-157779
+
+|*Severity:* Informational
+
+*Changes:* The policy RQL has been updated to remove the legacy `encryptionSettings` attribute check.
+
+*Current RQL:*
+----
+config from cloud.resource where cloud.type = 'azure' AND api.name = 'azure-disk-list' and json.rule = 'osType exists and managedBy exists and (encryptionSettings does not exist or encryptionSettings.enabled == false) and encryption.type is not member of ("EncryptionAtRestWithCustomerKey", "EncryptionAtRestWithPlatformAndCustomerKeys")'
+----
+
+*Updated RQL:*
+----
+config from cloud.resource where cloud.type = 'azure' AND api.name = 'azure-disk-list' and json.rule = 'osType exists and managedBy exists and encryption.type is not member of ("EncryptionAtRestWithCustomerKey", "EncryptionAtRestWithPlatformAndCustomerKeys")'
+----
+
+*Impact:* Low
+
+|*GCP Dataproc Cluster on GKE is using default network*
+//RLP-156961
+
+|*Severity:* Medium
+
+*Changes:* Policy RQL has been updated to cover Dataproc clusters using zonal GKE clusters.
+
+*Current RQL:*
+----
+config from cloud.resource where api.name = 'gcloud-dataproc-clusters-list' AND json.rule = status.state is member of ("SCHEDULED", "CREATING", "RUNNING") as X; config from cloud.resource where api.name = 'gcloud-container-describe-clusters' AND json.rule = status equals RUNNING and ['network'] ends with "default" as Y; filter ' $.Y.selfLink contains $.X.virtualClusterConfig.kubernetesClusterConfig.gkeClusterConfig.gkeClusterTarget '; show X;
+----
+
+*Updated RQL:*
+----
+config from cloud.resource where api.name = 'gcloud-dataproc-clusters-list' as X; config from cloud.resource where api.name = 'gcloud-container-describe-clusters' AND json.rule = status equals RUNNING and ['network'] ends with "default" as Y; filter ' $.X.virtualClusterConfig.kubernetesClusterConfig.gkeClusterConfig.gkeClusterTarget contains $.Y.location and $.X.virtualClusterConfig.kubernetesClusterConfig.gkeClusterConfig.gkeClusterTarget contains $.Y.name and $.Y.selfLink contains $.X.projectId '; show X;
+----
+
+*Impact:* Low - New alerts will be generated as per new RQL.
+
+|*GCP Dataproc Cluster on Compute Engine is using default network*
+//RLP-156954
+
+|*Severity:* Medium
+
+*Changes:* Policy RQL has been updated to match GCP API.
+
+*Current RQL:*
+----
+config from cloud.resource where cloud.type = 'gcp' AND api.name = 'gcloud-dataproc-clusters-list' AND json.rule = status.state is member of ("SCHEDULED", "CREATING", "RUNNING") and ( environmentConfig.executionConfig.networkUri ends with "default" or environmentConfig.executionConfig.subnetworkUri ends with "default" or ( environmentConfig.executionConfig.networkUri does not exist and environmentConfig.executionConfig.subnetworkUri does not exist ) )
+----
+
+*Updated RQL:*
+----
+config from cloud.resource where cloud.type = 'gcp' AND api.name = 'gcloud-dataproc-clusters-list' AND json.rule = status.state is member of ("SCHEDULED", "CREATING", "RUNNING") and ['config'] exists and ( config.gceClusterConfig.networkUri ends with "default" or config.gceClusterConfig.subnetworkUri ends with "default" or ( config.gceClusterConfig.networkUri does not exist and config.gceClusterConfig.subnetworkUri does not exist ) )
+----
+
+*Impact:* Low - New alerts will be generated as per new RQL.
 
 |===
+
+[#compliance-updates]
+=== Compliance Updates
+
+[cols="50%a,50%a"]
+|===
+
+|*Compliance Standard*
+|*Details*
+
+|*CIS Amazon Web Services Foundations Benchmark v6.0.0*
+//RLP-158111
+
+|Prisma Cloud now supports CIS Amazon Web Services Foundations Benchmark v6.0.0 Level 1 and Level 2.
+
+Level 1 defines a set of fundamental, broadly applicable security best practices that harden core AWS services while minimizing impact on usability and operations for most environments.
+
+Level 2 builds on this with more stringent, defense-in-depth requirements intended for organizations with elevated risk or regulatory needs.
+
+You can view this built-in standard and the associated policies on the *Compliance > Standards* page. You can also generate reports for immediate viewing or download, or schedule recurring reports to track this compliance standard over time.
+
+|*CIS Microsoft Azure Foundations Benchmark v5.0.0*
+//RLP-158110
+
+|Prisma Cloud now supports CIS Microsoft Azure Foundations Benchmark v5.0.0 Level 1 and Level 2.
+
+Level 1 provides baseline, broadly applicable security controls designed to strengthen an Azure environment without causing significant disruption to usability or operations.
+
+Level 2 introduces more stringent, defense-in-depth controls intended for organizations with heightened security or regulatory requirements.
+
+You can view this built-in standard and the associated policies on the *Compliance > Standards* page. You can also generate reports for immediate viewing or download, or schedule recurring reports to track this compliance standard over time.
+
+|===
+
+
+// 2+|*Policy Updates—Metadata*
 
 
 
