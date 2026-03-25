@@ -75,11 +75,13 @@ The referenced hotfix addresses this issue and ensures that iptables/nftables ru
 
 |*Resolved Issues*
 
-|The following additional fixes are included in this release:
+|Additional Fixes & Improvements:
 
-* CRI socket discovery race condition during boot, which could prevent the Defender from initializing properly.
-* Added nftables support for Compliance checks.
-* Resolved an issue where the Defender incorrectly reported an unhealthy state.
+* Improved Startup Reliability: Resolved a race condition in CRI socket discovery during boot that could occasionally prevent the Defender from initializing.
+
+* Expanded Compliance Support: Added support for nftables in Compliance checks.
+
+* Health Reporting Accuracy: Fixed a bug where the Defender incorrectly reported an "unhealthy" status when operating normally.
 
 |===
 
