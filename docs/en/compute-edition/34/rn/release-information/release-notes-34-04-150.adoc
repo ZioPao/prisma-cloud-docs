@@ -1,12 +1,12 @@
 :toc: macro
-== 34.04.1XX Hotfix Release Notes
+== 34.04.154 Hotfix Release Notes
 
 The following table has the release details:
 
 [cols="1,4"]
 |===
 |Build
-|34.04.1XX
+|34.04.154
 
 |Code name
 |Quinn Update 4
