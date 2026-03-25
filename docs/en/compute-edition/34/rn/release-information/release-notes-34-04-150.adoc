@@ -89,33 +89,21 @@ You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to
 |*ISSUE ID*
 |*DESCRIPTION*
 
-|*CWP-64765*
-
-tt:[34.04.1XX]
 
 |*Suppressed CVE-2026-33186 in gRPC*
 
 Suppressed CVE-2026-33186 in the gRPC vendor dependency via database migration.
 
-|*CWP-64693*
-
-tt:[34.04.1XX]
 
 |*Updated goxmldsig library*
 
 Updated the goxmldsig SAML XML signature library to address security vulnerabilities.
 
-|*CWP-64703*
-
-tt:[34.04.1XX]
 
 |*Upgraded Jackson to 2.18.6*
 
 Upgraded Jackson dependency to 2.18.6 to address GHSA-72hv-8253-57qq.
 
-|*CWP-64703*
-
-tt:[34.04.1XX]
 
 |*Updated MongoDB to 7.0.29*
 
