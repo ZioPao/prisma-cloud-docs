@@ -85,3 +85,68 @@ The referenced hotfix addresses this issue and ensures that iptables/nftables ru
 
 |===
 
+[#enhancements]
+=== Enhancements
+[cols="30%a,70%a"]
+|===
+|*Feature*
+|*Description*
+
+|*Restrict UI access for access key logins*
+//CWP-64415
+
+|Added ability to restrict UI access for access key logins under a feature flag, improving security posture for programmatic access.
+
+|*FIPS configuration via environment variable*
+//CWP-64696
+
+|Added support for setting the `FIPS_ENABLED` configuration from an environment variable in `twistlock.cfg`.
+
+|*nginx_unit vulnerability detection*
+//CWP-64476
+
+|Added vulnerability detection support for nginx_unit application server binaries.
+
+|===
+
+[#security-fixes]
+=== Security Fixes
+
+[cols="23%a,77%a"]
+|===
+|*ISSUE ID*
+|*DESCRIPTION*
+
+|*CWP-64765*
+
+tt:[34.04.1XX]
+
+|*Suppressed CVE-2026-33186 in gRPC*
+
+Suppressed CVE-2026-33186 in the gRPC vendor dependency via database migration.
+
+|*CWP-64693*
+
+tt:[34.04.1XX]
+
+|*Updated goxmldsig library*
+
+Updated the goxmldsig SAML XML signature library to address security vulnerabilities.
+
+|*CWP-64703*
+
+tt:[34.04.1XX]
+
+|*Upgraded Jackson to 2.18.6*
+
+Upgraded Jackson dependency to 2.18.6 to address GHSA-72hv-8253-57qq.
+
+|*CWP-64703*
+
+tt:[34.04.1XX]
+
+|*Updated MongoDB to 7.0.29*
+
+Updated MongoDB from 7.0.28 to 7.0.29 to address security vulnerabilities.
+
+|===

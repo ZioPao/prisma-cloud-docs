@@ -9,6 +9,70 @@ The following table lists the fixed issues for 34.xx releases.
 |*ISSUE ID*
 |*DESCRIPTION*
 
+|*CWP-64752*
+
+tt:[34.04.1XX]
+
+|*Fixed false-positive vulnerability matches for third-party packages*
+
+Fixed scanner to stop incorrectly deriving correlated OS package versions for all third-party package types, preventing false-positive vulnerability matches.
+
+|*CWP-64741*
+
+tt:[34.04.1XX]
+
+|*Fixed AVA scan result corruption*
+
+Fixed an issue where trailing output after an AVA (sub) process scan could corrupt scan results.
+
+|*CWP-64729*
+
+tt:[34.04.1XX]
+
+|*CNNF rules applied only when enabled*
+
+Fixed Cloud Native Network Firewall to only apply rules when the feature is explicitly enabled, preventing unintended network enforcement.
+
+|*CWP-64712*
+
+tt:[34.04.1XX]
+
+|*Fixed container Defender status command*
+
+Fixed the container Defender status command output.
+
+|*CWP-64122*
+
+tt:[34.04.1XX]
+
+|*Improved gzip file detection*
+
+Fixed tarball/gzip detection to use magic bytes rather than relying solely on file extension, resolving scan failures for misnamed archives.
+
+|*CWP-64647*
+
+tt:[34.04.1XX]
+
+|*Fixed Windows vulnerability assessments*
+
+Fixed incorrect FixedBuild mapping across Windows product IDs in the intelligence builder, resolving inaccurate Windows vulnerability assessments.
+
+|*CWP-64675*
+
+tt:[34.04.1XX]
+
+|*Fixed RPM database access in image scanning*
+
+Fixed image augmentation to execute yum commands as root when accessing RPM databases via SQLite, resolving scan failures on certain container images.
+
+|*CWP-64702*
+
+tt:[34.04.1XX]
+
+|*Fixed crash in compressed layer verification*
+
+Fixed a potential crash caused by an array index out of bounds when verifying compressed layer timestamps during image scanning.
+
 |*CWP-64581*
 
 tt:[34.04.145]
