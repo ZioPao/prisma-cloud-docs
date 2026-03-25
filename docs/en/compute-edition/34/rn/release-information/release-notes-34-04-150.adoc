@@ -56,34 +56,6 @@ NOTE: Defenders from the n-3 release will remain functional as described above.
 
 You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to n. For example, with `v34` as n and `v33` as n-1, you can upgrade directly from `33.01.137` to `34.00.141`. You can also upgrade directly from an n-2 version (`32.00.161`, `32.01.128`, `32.02.127`, `32.03.123`, `32.04.113`, `32.05.124`, `32.06.113`, `32.07.123`) to `34.00.141`.
 
-// |===
-[#Hotfix]
-=== Hotfix
-[cols="30%a,70%a"]
-|===
-|*Issue*
-|*Description*
-
-|*Defender Connectivity Issue Resolved*
-//PCSUP-30884
-
-|Resolved a regression in Quinn update 34.04.145 that makes the Defender set iptables/nftables entries in your environment, even when there is no policy such as Cloud Native Network Security (CNNS) or DNS monitoring requesting it.
-
-This bug affects all 34.04 Defenders. If the Defender is deployed on Tanzu Application Service (TAS), this may lead to severe connectivity issues.
-
-The referenced hotfix addresses this issue and ensures that iptables/nftables rules are set only when it is explicitly reflected in the policy. 
-
-|*Resolved Issues*
-
-|Additional Fixes & Improvements:
-
-* Improved Startup Reliability: Resolved a race condition in CRI socket discovery during boot that could occasionally prevent the Defender from initializing.
-
-* Expanded Compliance Support: Added support for nftables in Compliance checks.
-
-* Health Reporting Accuracy: Fixed a bug where the Defender incorrectly reported an "unhealthy" status when operating normally.
-
-|===
 
 [#enhancements]
 === Enhancements

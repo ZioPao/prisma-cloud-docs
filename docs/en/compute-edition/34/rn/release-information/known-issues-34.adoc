@@ -9,6 +9,30 @@ The following table lists the fixed issues for 34.xx releases.
 |*ISSUE ID*
 |*DESCRIPTION*
 
+|*Defender Connectivity Issue Resolved*
+//PCSUP-30884
+
+tt:[34.04.1XX]
+
+|Resolved a regression in Quinn update 34.04.145 that makes the Defender set iptables/nftables entries in your environment, even when there is no policy such as Cloud Native Network Security (CNNS) or DNS monitoring requesting it.
+
+This bug affects all 34.04 Defenders. If the Defender is deployed on Tanzu Application Service (TAS), this may lead to severe connectivity issues.
+
+The referenced hotfix addresses this issue and ensures that iptables/nftables rules are set only when it is explicitly reflected in the policy. 
+
+|*Resolved Issues*
+
+tt:[34.04.1XX]
+
+|Additional Fixes & Improvements:
+
+* Improved Startup Reliability: Resolved a race condition in CRI socket discovery during boot that could occasionally prevent the Defender from initializing.
+
+* Expanded Compliance Support: Added support for nftables in Compliance checks.
+
+* Health Reporting Accuracy: Fixed a bug where the Defender incorrectly reported an "unhealthy" status when operating normally.
+
+
 |*CWP-64752*
 
 tt:[34.04.1XX]
