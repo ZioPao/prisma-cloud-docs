@@ -26,7 +26,9 @@ tt:[34.04.154]
 
 |Additional Fixes & Improvements:
 
-* Improved Startup Reliability: Resolved a race condition in CRI socket discovery during boot that could occasionally prevent the Defender from initializing.
+* Improved Startup Reliability: This fix addresses an issue where the Defender may appear not to initialize properly in CRI environments, with logs indicating:
+
+`Failed to initialize CRI client: runtime version cannot be determined.`
 
 * Expanded Compliance Support: Added support for nftables in Compliance checks.
 
