@@ -9,7 +9,7 @@ Learn what's new in the Prisma® Cloud April 2026 release.
 * <<api-ingestions>>
 //* <<new-policies>>
 * <<policy-updates>>
-//* <<policy-deletions>>
+* <<policy-deletions>>
 //* <<iam-policy-updates>>
 * <<new-compliance-benchmarks-and-updates>>
 //* <<rest-api-updates>>
@@ -356,6 +356,69 @@ config from cloud.resource where cloud.type = 'gcp' AND api.name = 'gcloud-datap
 
 |===
 
+[#policy-deletions]
+=== Policy Deletions
+
+[cols="50%a,50%a"]
+
+|===
+|*Policy Updates*
+|*Description*
+
+|*AutoFocus Policy Deletions*
+//RLP-157644
+
+|*Changes–* Palo Alto Networks' AutoFocus product has reached its End of Life (EOL) date. As a result, the following AutoFocus Anomaly policies will be removed from Prisma Cloud. Learn more about https://live.paloaltonetworks.com/t5/community-blogs/autofocus-end-of-sale-faq-and-alternatives/ba-p/516051[AutoFocus EOL].
+
+* Traffic to a suspicious IP address associated with Loader activity
+* Traffic from a suspicious IP address associated with File Infector activity
+* Traffic to a suspicious IP address associated with File Infector activity
+* Traffic from a suspicious IP address associated with Dropper activity
+* Traffic to a suspicious IP address associated with Ransomware activity
+* Traffic to a suspicious IP address associated with Backdoor activity
+* Traffic to a suspicious IP address associated with Cryptominer activity
+* Traffic from a suspicious IP address associated with Botnet activity
+* Traffic from a suspicious IP address associated with Cryptominer activity
+* Traffic from a suspicious IP address associated with Ransomware activity
+* Traffic to a suspicious IP address associated with Linux Malware activity
+* Traffic to a suspicious IP address associated with Botnet activity
+* Traffic from a suspicious IP address associated with Backdoor activity
+* Traffic from a suspicious IP address associated with Linux Malware activity
+* Traffic from a suspicious IP address associated with Remote Access Trojan activity
+* Traffic to a suspicious IP address associated with Remote Access Trojan activity
+* Traffic from a suspicious IP address associated with DDoS activity
+* Traffic from a suspicious IP address associated with InfoStealer activity
+* Traffic to a suspicious IP address associated with DDoS activity
+* Traffic to a suspicious IP address associated with InfoStealer activity
+* Traffic from a suspicious IP address associated with Wiper activity
+* Traffic to a suspicious IP address associated with Wiper activity
+* Traffic to a suspicious IP address associated with Dropper activity
+* Traffic from a suspicious IP address associated with Loader activity
+* Traffic from a suspicious IP address associated with Rootkit activity
+* Traffic to a suspicious IP address associated with Webshell activity
+* Traffic from a suspicious IP address associated with Webshell activity
+* Traffic to a suspicious IP address associated with Rootkit activity
+* Traffic to a suspicious IP address associated with Exploit Kit activity
+* Traffic from a suspicious IP address associated with Exploit Kit activity
+* Traffic to a suspicious IP address associated with Hacking Tool activity
+* Traffic from a suspicious IP address associated with Hacking Tool activity
+* Traffic from a suspicious IP address associated with Worm activity
+* Traffic to a suspicious IP address associated with Worm activity
+* Traffic from a suspicious IP address associated with Downloader activity
+* Traffic to a suspicious IP address associated with Downloader activity
+
+
+*Impact*– Keep in mind the following potential effects of this change: +
+* Existing alerts will be resolved as `Policy_Deleted`. +
+* All policies related to AutoFocus will be deprecated. +
+* Attack Path policies associated with AutoFocus will be deprecated. +
+* RQL support for AutoFocus suggestions will be removed. +
+* The ability to add trusted IP addresses to AutoFocus anomaly polices will be deprecated. +
+* Any custom policies that use AutoFocus attributes will also be impacted. 
+
+
+|===
+
 [#new-compliance-benchmarks-and-updates]
 === Compliance Updates
 
@@ -388,6 +451,7 @@ Level 2 introduces more stringent, defense-in-depth controls intended for organi
 You can view this built-in standard and the associated policies on the *Compliance > Standards* page. You can also generate reports for immediate viewing or download, or schedule recurring reports to track this compliance standard over time.
 
 |===
+
 
 //[#new-policies]
 //=== New Policies
