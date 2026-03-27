@@ -26,7 +26,7 @@ Learn what's new in the Prisma® Cloud April 2026 release.
 |*Audit Log Retention Policy*
 //RLP=158209
 
-|The retention period for audit events stored in the Prisma Cloud database changes from 120 days to 30 days. This update is part of our ongoing efforts to optimize performance and resource usage. The new retention period ensures a more responsive experience and efficient resource utilization across all environments. 
+|The retention period for audit events stored in the Prisma Cloud database changed from 120 days to 30 days. This update is part of our ongoing efforts to optimize performance and resource usage. The new retention period ensures a more responsive experience and efficient resource utilization across all environments. 
 
 
 *Impact*: Features that rely on historical audit data will be impacted: +
@@ -81,6 +81,8 @@ The Security Audit role does not include the permissions. A custom role is requi
 
 |*AWS Secrets Manager*
 //RLP-158050
+
+tt:[Update]
 
 |*aws-secretsmanager-describe-secret*
 
@@ -179,6 +181,8 @@ Additional permissions required:
 |*Amazon Route53 Resolver*
 //RLP-157836
 
+tt:[Update]
+
 |*aws-route53resolver-resolver-endpoint*
 
 The API now ingests additional attribute `IpAddresses`.
@@ -188,6 +192,19 @@ Additional permission required:
 * `route53resolver:ListResolverEndpointIpAddresses`
 
 The Security Audit role includes the permission.
+
+|*Amazon EventBridge*
+//RLP-158228
+
+tt:[Update]
+
+|*aws-events-eventbus*
+
+Additional permission required:
+
+* `events:DescribeEventBus`
+
+The API now ingests additional fields related to the eventbus resource.
 
 |*Amazon Cognito*
 //RLP-157834
