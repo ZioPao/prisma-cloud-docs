@@ -18,8 +18,7 @@ The following table has the release details:
 |Minor release
 
 |SHA-256
-|7037b99fb2f6a1137545cf565be5d90f85584795c72f56f0988f287ea203c725 
-
+|9099536097666d5bce8108135c0bf04857f9c0f5f94412c275faefb0a560e0f8
 |===
 
 Review the https://docs.prismacloud.io/en/compute-edition/34/admin-guide/install/system-requirements[system requirements] to learn about the supported operating systems, hypervisors, runtimes, tools, and orchestrators.
@@ -92,12 +91,12 @@ You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to
 
 |*Suppressed CVE-2026-33186 in gRPC*
 
-Suppressed CVE-2026-33186 in the gRPC vendor dependency via database migration.
+|Suppressed CVE-2026-33186 in the gRPC vendor dependency via database migration.
 
 
 |*Updated goxmldsig library*
 
-Updated the goxmldsig SAML XML signature library to address security vulnerabilities.
+|Updated the goxmldsig SAML XML signature library to address security vulnerabilities.
 
 
 |*Upgraded Jackson to 2.18.6*
@@ -107,6 +106,6 @@ Upgraded Jackson dependency to 2.18.6 to address GHSA-72hv-8253-57qq.
 
 |*Updated MongoDB to 7.0.29*
 
-Updated MongoDB from 7.0.28 to 7.0.29 to address security vulnerabilities.
+|Updated MongoDB from 7.0.28 to 7.0.29 to address security vulnerabilities.
 
 |===
