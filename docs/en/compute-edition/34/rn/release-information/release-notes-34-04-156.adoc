@@ -101,7 +101,7 @@ You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to
 
 |*Upgraded Jackson to 2.18.6*
 
-Upgraded Jackson dependency to 2.18.6 to address GHSA-72hv-8253-57qq.
+|Upgraded Jackson dependency to 2.18.6 to address GHSA-72hv-8253-57qq.
 
 
 |*Updated MongoDB to 7.0.29*
