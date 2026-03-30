@@ -23,9 +23,9 @@ The following table has the release details:
 
 Review the https://docs.prismacloud.io/en/compute-edition/34/admin-guide/install/system-requirements[system requirements] to learn about the supported operating systems, hypervisors, runtimes, tools, and orchestrators.
 
-//You can download the release image from the Palo Alto Networks Customer Support Portal, or use a program or script (such as curl, wget) to download the release image directly from our CDN:
+You can download the release image from the Palo Alto Networks Customer Support Portal, or use a program or script (such as curl, wget) to download the release image directly from our CDN:
 
-//https://cdn.twistlock.com/releases/daxCEyCH/prisma_cloud_compute_edition_console_34.04.145.tar.gz[https://cdn.twistlock.com/releases/daxCEyCH/prisma_cloud_compute_edition_console_34.04.145.tar.gz]
+// https://cdn.twistlock.com/releases/daxCEyCH/prisma_cloud_compute_edition_console_34.04.145.tar.gz[https://cdn.twistlock.com/releases/AQSilBiU/prisma_cloud_compute_edition_console_34.04.156.tar.gz]
 
 toc::[]
 
@@ -66,7 +66,7 @@ You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to
 |*Restrict UI access for access key logins*
 //CWP-64415
 
-|Added ability to restrict UI access for access key logins under a feature flag, improving security posture for programmatic access.
+|Added ability to block login using an access key via the CWP login UI page under a feature flag, aligning with the way access key based logins are handled by the main Prisma login page.
 
 |*FIPS configuration via environment variable*
 //CWP-64696
@@ -91,7 +91,7 @@ You can upgrade the Prisma Cloud console directly from any n-1 or n-2 version to
 
 |*Suppressed CVE-2026-33186 in gRPC*
 
-|Suppressed CVE-2026-33186 in the gRPC vendor dependency via database migration.
+|Suppressed CVE-2026-33186 in the gRPC vendor dependency via database migration. The application does not use the `grpc/authz` package or implement custom path-based authorization interceptors on our gRPC servers, therefore the authorization bypass described in CVE-2026-33186 does not impact the application.
 
 
 |*Updated goxmldsig library*
