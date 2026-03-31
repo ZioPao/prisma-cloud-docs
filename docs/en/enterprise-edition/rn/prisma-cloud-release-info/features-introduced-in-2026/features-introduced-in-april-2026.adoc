@@ -42,6 +42,11 @@ The following functional areas will continue to operate without change, as they 
 
 No additional action is required. If your compliance or operational requirements necessitate audit log retention beyond 30 days, we recommend ensuring your CSP (AWS, Azure, GCP) is configured to archive these logs in their respective native storage (e.g., S3, GCS, or Azure Blob Storage).
 
+|*VPC Resource Ingestion*
+//RLP-158311
+
+|Prisma Cloud will now ingest accepter side VPC connections in addition to requester side VPC connections. This will ensure better coverage of VPC peering endpoints irrespective of whether the given VPC functions as a requester or an accepter for a given connection.
+
 
 |===
 
